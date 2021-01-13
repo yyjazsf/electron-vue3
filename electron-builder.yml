@@ -1,0 +1,29 @@
+appId: com.yingyj.electron
+productName: electron-demo
+directories: 
+  # buildResources: build
+  output: dist_electron
+  app: dist_electron/bundled
+extends: null
+files: []
+asar: false
+publish: 
+  provider: generic
+  url: null
+  channel: latest
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+win:
+   target:
+     - target: nsis
+       arch:
+         - x64
+         - ia32
+electronDownload:
+  version: 8.2.0
+  mirror: https://npm.taobao.org/mirrors/electron/
+  strictSSL: false
+  isVerifyChecksum: true

@@ -1,6 +1,7 @@
 {
   "name": "electron-vue-scaffold",
   "version": "0.1.0",
+  "main": "app.js",
   "private": true,
   "scripts": {
     "start": "",
@@ -11,14 +12,15 @@
     "lint": "vue-cli-service lint",
     "electron:watch": "cd background && tsc -w",
     "electron:dev": "cd background && tsc && electron dist/app.js",
-    "electron:pack-mac": "cp ",
-    "electron:pack-win32": "cp ",
+    "electron:pack-mac": "electron-builder --mac --config electron-builder.yml",
+    "electron:pack-win32": "electron-builder --win --ia32 --config electron-builder.yml",
     "electron:serve": "npm-run-all --parallel serve electron:watch electron:dev",
-    "electron:build": "npm-run-all --sequential build electron:pack-mac"
+    "electron:build": "node scripts/build"
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "electron": "^11.1.1",
+    "electron-devtools-installer": "^3.1.1",
+    "electron-log": "^4.3.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -41,12 +43,14 @@
     "@vue/test-utils": "^2.0.0-0",
     "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
-    "electron-devtools-installer": "^3.1.1",
+    "electron": "8.2.0",
+    "electron-builder": "^22.9.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.5",
     "sass-loader": "^8.0.2",
+    "shelljs": "^0.8.4",
     "typescript": "~3.9.3",
     "vue-jest": "^5.0.0-0"
   }

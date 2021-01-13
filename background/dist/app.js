@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,13 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+var electron_log_1 = require("electron-log");
+Object.assign(console, electron_log_1["default"].functions);
 var electron_1 = require("electron");
-var createProtocol_1 = require("./utils/createProtocol");
+var createProtocol_1 = require("./createProtocol");
 var electron_devtools_installer_1 = require("electron-devtools-installer");
-var isDevelopment = process.env.NODE_ENV !== 'production';
+electron_1.app.allowRendererProcessReuse = true;
+var isDevelopment = process.env.NODE_ENV !== "production";
 // Scheme must be registered before the app is ready
 electron_1.protocol.registerSchemesAsPrivileged([
-    { scheme: 'app', privileges: { secure: true, standard: true } }
+    { scheme: "app", privileges: { secure: true, standard: true } }
 ]);
 function createWindow() {
     return __awaiter(this, void 0, void 0, function () {
@@ -56,10 +59,11 @@ function createWindow() {
                         webPreferences: {
                             // Use pluginOptions.nodeIntegration, leave this alone
                             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-                            nodeIntegration: true
+                            nodeIntegration: false
                         }
                     });
                     if (!process.env.WEBPACK_DEV_SERVER_URL) return [3 /*break*/, 2];
+                    console.warn(__dirname);
                     // Load the url of the dev server if in development mode
                     return [4 /*yield*/, win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)];
                 case 1:
@@ -69,23 +73,25 @@ function createWindow() {
                         win.webContents.openDevTools();
                     return [3 /*break*/, 3];
                 case 2:
-                    createProtocol_1["default"]('app');
-                    win.loadURL('http://localhost:8080/renderer.html');
+                    createProtocol_1["default"]("app");
+                    console.warn(__dirname);
+                    // Load the index.html when not in development
+                    win.loadURL("app://./index.html");
                     _a.label = 3;
                 case 3: return [2 /*return*/];
             }
         });
     });
 }
-// Quit when all windows are closed.
-electron_1.app.on('window-all-closed', function () {
+// Quit when all windows are closed.Î
+electron_1.app.on("window-all-closed", function () {
     // On macOS it is common for applications and their menu bar
     // to stay active until the user quits explicitly with Cmd + Q
-    if (process.platform !== 'darwin') {
-        electron_1.app.quit();
-    }
+    // if (process.platform !== 'darwin') {
+    electron_1.app.quit();
+    // }
 });
-electron_1.app.on('activate', function () {
+electron_1.app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (electron_1.BrowserWindow.getAllWindows().length === 0)
@@ -94,7 +100,7 @@ electron_1.app.on('activate', function () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-electron_1.app.on('ready', function () { return __awaiter(void 0, void 0, void 0, function () {
+electron_1.app.on("ready", function () { return __awaiter(void 0, void 0, void 0, function () {
     var e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -109,7 +115,7 @@ electron_1.app.on('ready', function () { return __awaiter(void 0, void 0, void 0
                 return [3 /*break*/, 4];
             case 3:
                 e_1 = _a.sent();
-                console.error('Vue Devtools failed to install:', e_1.toString());
+                console.error("Vue Devtools failed to install:", e_1.toString());
                 return [3 /*break*/, 4];
             case 4:
                 createWindow();
@@ -119,15 +125,15 @@ electron_1.app.on('ready', function () { return __awaiter(void 0, void 0, void 0
 }); });
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
-    if (process.platform === 'win32') {
-        process.on('message', function (data) {
-            if (data === 'graceful-exit') {
+    if (process.platform === "win32") {
+        process.on("message", function (data) {
+            if (data === "graceful-exit") {
                 electron_1.app.quit();
             }
         });
     }
     else {
-        process.on('SIGTERM', function () {
+        process.on("SIGTERM", function () {
             electron_1.app.quit();
         });
     }

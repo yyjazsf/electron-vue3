@@ -1,24 +1,10 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const CopyPlugin = require("copy-webpack-plugin");
-
-/* eslint-enable @typescript-eslint/no-var-requires */
-
 module.exports = {
   publicPath: "./",
-  outputDir: "dist_electron/bundled",
+  outputDir: "dist_electron/bundled/",
+
   configureWebpack: {
-    plugins: [
-      new CopyPlugin([
-        {
-          from: "background",
-          to: ""
-        },
-        {
-          from: "package.json",
-          to: ""
-        }
-      ])
-    ]
+    entry: './renderer/main.ts',
+    target: 'electron-renderer',
   },
   pluginOptions: {
     electronBuilder: {
