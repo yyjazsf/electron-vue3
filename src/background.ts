@@ -1,8 +1,12 @@
 'use strict'
+import log from 'electron-log'
+Object.assign(console, log.functions)
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import { Cookie } from './electron/utils'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // Scheme must be registered before the app is ready
@@ -18,8 +22,8 @@ async function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: (process.env
-          .ELECTRON_NODE_INTEGRATION as unknown) as boolean
+      nodeIntegration: true
+      // (process.env.ELECTRON_NODE_INTEGRATION as unknown) as boolean
     }
   })
 
@@ -47,6 +51,13 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
+})
+
+ipcMain.on('cookie', async (event, method: string, param?: any) => {
+  console.log(method, param)
+  Cookie[method](param).then((res: string) => {
+    event.returnValue = res
+  })
 })
 
 // This method will be called when Electron has finished

@@ -8,8 +8,8 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "electron:build": "vue-cli-service electron:build",
-    "electron:serve": "vue-cli-service electron:serve",
+    "electron:build": "IS_ELECTRON=true vue-cli-service electron:build",
+    "electron:serve": "IS_ELECTRON=true ELECTRON_NODE_INTEGRATION=true vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
@@ -17,6 +17,7 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "electron": "^11.1.1",
+    "electron-log": "^4.3.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"

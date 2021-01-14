@@ -4730,6 +4730,11 @@ electron-devtools-installer@^3.1.0:
     semver "^7.2.1"
     unzip-crx-3 "^0.2.0"
 
+electron-log@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.npm.taobao.org/electron-log/download/electron-log-4.3.1.tgz?cache=0&sync_timestamp=1609258708179&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Felectron-log%2Fdownload%2Felectron-log-4.3.1.tgz#1405fef9d4e6964a5fdb8790a69163aa237ffe91"
+  integrity sha1-FAX++dTmlkpf24eQppFjqiN//pE=
+
 electron-publish@22.9.1:
   version "22.9.1"
   resolved "https://registry.npm.taobao.org/electron-publish/download/electron-publish-22.9.1.tgz#7cc76ac4cc53efd29ee31c1e5facb9724329068e"
