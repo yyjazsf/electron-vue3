@@ -18,7 +18,7 @@ export default defineComponent({
   methods: {
     onSetCookie() {
       const ok = ipcRenderer.sendSync('cookie', 'set', {
-        url: 'https://www.baidu.com',
+        url: 'app://.', // doesn't work
         name: 'name',
         value: 'yyj'
       })

@@ -6,7 +6,18 @@ export const Cookie = {
       console.log(error);
     });
   },
-  set(cookie: CookiesSetDetails) {
+  set(cookie: CookiesSetDetails | CookiesSetDetails[]) {
+    if(Array.isArray(cookie)) {
+        if(!cookie.length) {
+          return Promise.resolve([])
+        }
+        const request: Promise<any>[] = []
+        cookie.forEach(req => {
+            request.push(session.defaultSession.cookies.set(req))
+        })
+        return Promise.allSettled(request)
+    } 
+    // Promise.allSettled 处理多个请求
     return session.defaultSession.cookies.set(cookie).catch(error => {
       console.log(error);
     });
