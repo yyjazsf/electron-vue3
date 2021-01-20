@@ -1,4 +1,6 @@
 import AgoraRtcEngine from "agora-electron-sdk";
+// const AgoraRtcEngine = require('agora-electron-sdk')
+
 
 const APPID = process.env["AGORA_APPID"] || "07c87cea43744f39a0ecc0283d07fa75";
 

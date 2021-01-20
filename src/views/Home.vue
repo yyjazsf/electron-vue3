@@ -43,7 +43,7 @@ export default defineComponent({
       students: [] as number[],
       form: {
         uid: 0,
-        token: '00607c87cea43744f39a0ecc0283d07fa75IAAB6Rv6huUj/aKhCvV63qz4uuKrfJIaScYP/5HqQGpspU5ptMcAAAAAEAAlICC+x97+XwEAAQDG3v5f'
+        token: '00607c87cea43744f39a0ecc0283d07fa75IACr5NOAfq77Lu1ok0jdUoT4TqrqfgSzDkSbjajqocai9U5ptMcAAAAAEABI+NBcczUIYAEAAQB1NQhg'
       }
     }
   },
@@ -62,12 +62,12 @@ export default defineComponent({
 
     const ok = agora.onJoinChannel({
       token: this.form.token,
-      channel: 'ipalfish',
+      channel: 'demo',
       uid: this.form.uid++
     })
     if(ok) {
       ElMessage({
-        message: '渠道 ipalfish 加入成功',
+        message: '渠道 demo 加入成功',
         type: 'success'
       })
     }

@@ -1,0 +1,44 @@
+appId: com.electron.dev
+productName: electron-vue3-dev
+asar: false
+# afterPack:
+publish:
+  - provider: generic
+    url: http://localhost:5000/
+    channel: latest
+    useMultipleRangeRequest: false
+extends: null
+files:
+  - "dist_electron/bundled/**/*"
+  - "buildResources/icon.*"
+  - "node_modules/**/*"
+
+directories:
+  output: dist_electron
+  buildResources: buildResources
+  app: dist_electron/bundled/
+mac:
+  # type: development
+  electronLanguages: zh-CN
+  hardenedRuntime: true
+  entitlements: entitlements.mac.plist
+  category: public.demo.agora
+  icon: buildResources/icon-512x512.png
+  darkModeSupport: true
+  target:
+    - zip
+    - dmg
+  extendInfo:
+    NSMicrophoneUsageDescription: 请允许本程序访问您的麦克风
+    NSCameraUsageDescription: 请允许本程序访问您的摄像头
+win:
+  icon: buildResources/icon-256x256.png
+  # certificateFile:
+  # certificatePassword:
+  publisherName: yyj
+  # legalTrademarks:
+  target:
+    - target: nsis # 自动更新
+      arch:
+        - ia32
+electronVersion: 10.2.0
